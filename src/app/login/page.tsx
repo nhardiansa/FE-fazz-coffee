@@ -1,8 +1,8 @@
-import LoginPage from "@/features/auth/presenter/pages/Login"
+import LoginPresenter from "@/features/auth/presenter/pages/LoginPresenter"
 
 function Login() {
   return (
-    <LoginPage />
+    <LoginPresenter />
   )
 }
 

@@ -24,7 +24,7 @@ import discord from '@/assets/images/discord.png'
 import spotify from '@/assets/images/spotify.png'
 import Footer from "@/core/components/Footer/Footer";
 import CustomerTestimonies from "@/core/components/CustomerTestimonies/CustomerTestimonies";
-import Navbar from "@/core/components/Navbar/Navbar";
+import NavbarPresenter from "@/core/components/Navbar/NavbarPresenter";
 
 const partners = [netflix, reddit, amazon, discord, spotify]
 
@@ -71,7 +71,7 @@ export default function Home() {
   return (
     <Box sx={{ fontFamily: rubik.style.fontFamily }}>
       {/* Navbar */}
-      <Navbar />
+      <NavbarPresenter />
 
       {/* Hero */}
       <Hero />
@@ -116,7 +116,7 @@ export default function Home() {
 
 const Hero = () => {
   return (
-    <Box position='relative' sx={{ paddingTop: '80px' }}>
+    <Box position='relative' sx={{ paddingTop: { xs: "57px", md: '80px' } }}>
       <Box sx={{ position: 'relative', width: '100%', height: { xs: '89vh', lg: '85vh' }, backgroundColor: 'black', filter: { sm: 'brightness(60%)', xs: 'brightness(45%)' } }} >
         <Image src={HeroBanner} alt="Hero Banner" fill style={{ objectFit: 'cover' }} />
       </Box>

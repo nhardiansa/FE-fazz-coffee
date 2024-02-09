@@ -49,15 +49,20 @@ const modalStyle: SxProps<Theme> = {
   p: '1.5rem',
 };
 
-const Navbar = () => {
+interface INavbar {
+  isLogged: boolean
+  isModalMobileOpen: boolean
+  modalHandler: () => void
+  logoutHandler: () => void
+}
 
-  const [openModal, setOpenModal] = useState(false)
+const Navbar = ({ isLogged, isModalMobileOpen, logoutHandler, modalHandler }: INavbar) => {
 
   return (
     <>
       <Box component='nav' sx={{ width: '100%', backgroundColor: '#fff', position: 'fixed', zIndex: '100' }}>
         <Container>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: '1200px', marginInline: 'auto', paddingBlock: '21.5px' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: '1200px', marginInline: 'auto', paddingBlock: { md: '21.5px', xs: '10px' } }}>
             {/* Brand */}
             <Link href='/'>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
@@ -106,24 +111,38 @@ const Navbar = () => {
               />
 
               {/* Chat */}
-              <Box>
-                <QuestionAnswerIcon sx={{ color: '#4F5665', cursor: 'pointer' }} />
-              </Box>
+              {
+                isLogged && (
+                  <Box>
+                    <QuestionAnswerIcon sx={{ color: '#4F5665', cursor: 'pointer' }} />
+                  </Box>
+                )
+              }
 
               {/* Profile */}
-              <Avatar alt="Remy Sharp" src={PeoplePlaceholder.src} sx={{ cursor: 'pointer', width: { xs: '2rem', sm: '40px' }, height: { xs: '2rem', sm: '40px' } }} />
+              {
+                isLogged && (
+                  <Avatar alt="Remy Sharp" src={PeoplePlaceholder.src} sx={{ cursor: 'pointer', width: { xs: '2rem', sm: '40px' }, height: { xs: '2rem', sm: '40px' } }} />
+                )
+              }
 
               {/* Login Button */}
-              {/* <Box className="btn-wrapper" sx={{ width: 'fit-content', display: { xs: 'none', md: 'block' } }}>
-                <FazzButton style={{ paddingBlock: '9px', margin: '0', width: '150px' }}>
-                  Sign In
-                </FazzButton>
-              </Box> */}
+              {
+                !isLogged && (
+                  <Box className="btn-wrapper" sx={{ width: 'fit-content', display: { xs: 'none', md: 'block' } }}>
+                    <Link href='/login'>
+                      <FazzButton style={{ paddingBlock: '9px', margin: '0', width: '150px' }}>
+                        Sign In
+                      </FazzButton>
+                    </Link>
+                  </Box>
+                )
+              }
 
               {/* Menu button in mobile */}
-              <Box className="menu-mobile" sx={{ display: { md: 'none' }, cursor: 'pointer' }} onClick={() => setOpenModal(true)}>
+              <Box className="menu-mobile" sx={{ display: { md: 'none' }, cursor: 'pointer' }} onClick={modalHandler}>
                 {
-                  openModal ? (
+                  isModalMobileOpen ? (
                     <CloseIcon sx={{ width: '1.5rem', height: '1.5rem', color: '#4F5665', fontSize: '2rem' }} />
                   ) : (
                     <MenuIcon sx={{ width: '1.5rem', height: '1.5rem', color: '#4F5665', fontSize: '2rem' }} />
@@ -136,8 +155,8 @@ const Navbar = () => {
       </Box >
 
       <Modal
-        open={openModal}
-        onClose={() => setOpenModal(false)}
+        open={isModalMobileOpen}
+        onClose={modalHandler}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -174,14 +193,33 @@ const Navbar = () => {
           </Box>
 
           {/* Buttons */}
-          <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', marginTop: '2rem', rowGap: '1rem', alignItems: 'center' }}>
-            <FazzButton style={{ paddingBlock: '5px', borderRadius: '0.7rem', maxWidth: '10rem', margin: 0 }}>
-              Sign In
-            </FazzButton>
-            <FazzButton style={{ paddingBlock: '5px', borderRadius: '0.7rem', maxWidth: '10rem', margin: 0, backgroundColor: 'white', border: '2px solid #FFBA33' }}>
-              Register
-            </FazzButton>
-          </Box>
+          {
+            !isLogged && (
+              <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', marginTop: '2rem', rowGap: '1rem', alignItems: 'center' }}>
+                <FazzButton style={{ paddingBlock: '5px', borderRadius: '0.7rem', maxWidth: '10rem', margin: 0 }}>
+                  <Link href='/login' style={{ maxWidth: '10rem' }}>
+                    Sign In
+                  </Link>
+                </FazzButton>
+                <FazzButton style={{ paddingBlock: '5px', borderRadius: '0.7rem', maxWidth: '10rem', margin: 0, backgroundColor: 'white', border: '2px solid #FFBA33' }}>
+                  <Link href='/register'>
+                    Register
+                  </Link>
+                </FazzButton>
+              </Box>
+            )
+          }
+
+          {/* Logout button */}
+          {
+            isLogged && (
+              <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', marginTop: '2rem', rowGap: '1rem', alignItems: 'center' }}>
+                <FazzButton onClick={logoutHandler} style={{ paddingBlock: '5px', borderRadius: '0.7rem', maxWidth: '10rem', margin: 0, bgColor: 'red' }}>
+                  Log out
+                </FazzButton>
+              </Box>
+            )
+          }
         </Box>
       </Modal>
 
