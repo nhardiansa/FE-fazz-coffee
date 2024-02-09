@@ -5,14 +5,27 @@ import { AuthUseCase } from "@/features/auth/useCases/authUseCase";
 export const loginAction = async (get: () => LoginState) => {
   const service = new AuthServiceImpl();
   const interactor = new AuthUseCase(service);
-  get().setLoading(true);
 
-  try {
-    const token = await interactor.login(get().credential);
-    get().setToken(token);
-  } catch (error) {
-    get().setErrorMessage("Failed to login");
-  } finally {
-    get().setLoading(false);
-  }
+  const result = await interactor.login(get().credential);
+
+  get().setStatus({ ...get().status, loading: true, message: "" });
+
+  result
+    .ifLeft((error) => {
+      get().setStatus({
+        ...get().status,
+        message: error.message,
+        success: false,
+      });
+    })
+    .ifRight((token) => {
+      get().setStatus({
+        ...get().status,
+        message: "Login success",
+        success: true,
+      });
+      get().setToken(token);
+    });
+
+  get().setStatus({ ...get().status, loading: false });
 };

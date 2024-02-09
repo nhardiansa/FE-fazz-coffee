@@ -4,21 +4,18 @@ import { AuthService } from "../useCases/authUseCase";
 
 class AuthHTTP extends Http {
   async login(credential: Credential) {
-    return await this.get("todos/1", { ...credential });
+    return await this.post("auth/login", { ...credential });
   }
 }
 
 export class AuthServiceImpl implements AuthService {
-  async loginWithCredential(params: Credential): Promise<Token> {
+  async loginWithCredential(credential: Credential): Promise<Token> {
     const http = new AuthHTTP();
+    const { data } = await http.login(credential);
 
-    const result = await http.login(params);
-
-    console.log(result, "asdsad");
-
-    return Promise.resolve({
-      access: "asdasdads",
-      refresh: "asdasd",
-    });
+    return {
+      access: data.result.access,
+      refresh: data.result.refresh,
+    };
   }
 }
