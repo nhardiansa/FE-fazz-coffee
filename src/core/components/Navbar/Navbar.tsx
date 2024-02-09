@@ -17,25 +17,6 @@ import PeoplePlaceholder from '@/assets/images/people-placeholder.png'
 import { rubik } from '@/utils/fonts'
 import FazzButton from '../Button/Button'
 
-const mainMenu = [
-  {
-    text: 'Home',
-    href: '#'
-  },
-  {
-    text: 'Product',
-    href: '#'
-  },
-  {
-    text: 'Your Cart',
-    href: '#'
-  },
-  {
-    text: 'History',
-    href: '#'
-  },
-]
-
 const modalStyle: SxProps<Theme> = {
   position: 'absolute',
   top: '50%',
@@ -49,14 +30,20 @@ const modalStyle: SxProps<Theme> = {
   p: '1.5rem',
 };
 
+export interface menuType {
+  text: string
+  href: string
+  isActive: boolean
+}
 interface INavbar {
   isLogged: boolean
   isModalMobileOpen: boolean
   modalHandler: () => void
   logoutHandler: () => void
+  menus: menuType[]
 }
 
-const Navbar = ({ isLogged, isModalMobileOpen, logoutHandler, modalHandler }: INavbar) => {
+const Navbar = ({ isLogged, isModalMobileOpen, logoutHandler, modalHandler, menus }: INavbar) => {
 
   return (
     <>
@@ -84,9 +71,9 @@ const Navbar = ({ isLogged, isModalMobileOpen, logoutHandler, modalHandler }: IN
             {/* Menus */}
             <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: '38px' }}>
               {
-                mainMenu.map(menu => (
+                menus.map(menu => (
                   <Link key={menu.text} href={menu.href}>
-                    <Typography component='span' sx={{ fontFamily: rubik.style.fontFamily, color: '#4F5665', ':hover': { textDecorationLine: 'underline' } }}>
+                    <Typography component='span' sx={{ fontFamily: rubik.style.fontFamily, fontWeight: menu.isActive ? '600' : '400', color: '#4F5665', ':hover': { textDecorationLine: 'underline' } }}>
                       {menu.text}
                     </Typography>
                   </Link>
@@ -106,7 +93,7 @@ const Navbar = ({ isLogged, isModalMobileOpen, logoutHandler, modalHandler }: IN
                 }}
                 // variant="filled"
                 placeholder="Search"
-                sx={{ display: { xs: 'none', sm: 'block' }, '.MuiInputBase-input': { paddingBlock: '8px', paddingLeft: '0' }, '.MuiInputBase-root': { borderRadius: '30px' }, maxWidth: '178px', backgroundColor: '#EFEEEE', borderRadius: '30px' }}
+                sx={{ display: { xs: 'none', sm: 'block' }, '.MuiInputBase-input': { paddingBlock: '11.5px', paddingLeft: '0' }, '.MuiInputBase-root': { borderRadius: '30px' }, maxWidth: '178px', backgroundColor: '#EFEEEE', borderRadius: '30px' }}
                 inputProps={{ sx: { fontFamily: rubik.style.fontFamily } }}
               />
 
@@ -182,7 +169,7 @@ const Navbar = ({ isLogged, isModalMobileOpen, logoutHandler, modalHandler }: IN
           {/* Menu */}
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '38px' }}>
             {
-              mainMenu.map(menu => (
+              menus.map(menu => (
                 <Link key={menu.text} href={menu.href}>
                   <Typography component='span' sx={{ fontFamily: rubik.style.fontFamily, color: '#4F5665', ':hover': { textDecorationLine: 'underline' } }}>
                     {menu.text}
