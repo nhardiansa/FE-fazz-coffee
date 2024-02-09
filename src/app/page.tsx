@@ -24,7 +24,7 @@ import discord from '@/assets/images/discord.png'
 import spotify from '@/assets/images/spotify.png'
 import Footer from "@/core/components/Footer/Footer";
 import CustomerTestimonies from "@/core/components/CustomerTestimonies/CustomerTestimonies";
-import Navbar from "@/core/components/Navbar/Navbar";
+import NavbarPresenter from "@/core/components/Navbar/NavbarPresenter";
 
 const partners = [netflix, reddit, amazon, discord, spotify]
 
@@ -71,7 +71,7 @@ export default function Home() {
   return (
     <Box sx={{ fontFamily: rubik.style.fontFamily }}>
       {/* Navbar */}
-      <Navbar />
+      <NavbarPresenter />
 
       {/* Hero */}
       <Hero />
