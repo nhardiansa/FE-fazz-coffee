@@ -1,7 +1,7 @@
-import RegisterPage from '@/features/auth/presenter/pages/Register'
+import RegisterPresenter from '@/features/auth/presenter/pages/RegisterPresenter'
 
 function Register() {
-  return <RegisterPage />
+  return <RegisterPresenter />
 }
 
 export default Register
