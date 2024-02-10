@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 import SideImage from '@/assets/images/coffeshop-pict.jpg';
 import GoogleIcon from '@/assets/images/google-icon.png';
-import FazzCoffeIcon from '@/app/icon.png'
+import FazzCoffeIcon from '@/app/icon.svg'
 import { rubik } from '@/utils/fonts';
 import Link from 'next/link';
 import Footer from '@/core/components/Footer/Footer';
@@ -94,6 +94,8 @@ const FormAuth = () => {
               <Image
                 src={FazzCoffeIcon}
                 alt='Fazz Coffee Icon'
+                width={45}
+                height={48}
               />
             </Box>
             <Typography className={rubik.className} variant='h1' sx={{ fontFamily: rubik.style.fontFamily, fontSize: '20px', fontWeight: 700 }}>

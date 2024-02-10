@@ -1,9 +1,9 @@
 'use client'
 
+import React from 'react'
 import { Avatar, Box, Container, InputAdornment, Modal, SxProps, TextField, Theme, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
 
 import {
   Search as SearchIcon,
@@ -12,7 +12,7 @@ import {
   Close as CloseIcon
 } from '@mui/icons-material'
 
-import BrandIcon from '@/app/icon.png'
+import BrandIcon from '@/app/icon.svg'
 import PeoplePlaceholder from '@/assets/images/people-placeholder.png'
 import { rubik } from '@/utils/fonts'
 import FazzButton from '../Button/Button'
@@ -47,18 +47,17 @@ const Navbar = ({ isLogged, isModalMobileOpen, logoutHandler, modalHandler, menu
 
   return (
     <>
-      <Box component='nav' sx={{ width: '100%', backgroundColor: '#fff', position: 'fixed', zIndex: '100' }}>
+      <Box component='nav' sx={{ width: '100%', backgroundColor: '#fff', position: 'fixed', zIndex: '100', borderBottom: '0.5px solid #cdcdcd' }}>
         <Container>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: '1200px', marginInline: 'auto', paddingBlock: { md: '21.5px', xs: '10px' } }}>
             {/* Brand */}
             <Link href='/'>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                <Box position='relative'>
+                <Box position='relative' sx={{ height: { xs: "36.44px", md: '45.54px' }, width: { xs: '40px', md: '50px' } }}>
                   <Image
                     alt="Fazz Coffee Icon"
                     src={BrandIcon}
-                    width={30}
-                    height={33}
+                    fill
                   />
                 </Box>
 

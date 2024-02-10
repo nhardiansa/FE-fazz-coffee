@@ -8,7 +8,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import XIcon from '@mui/icons-material/X';
 
-import FazzCoffeIcon from '@/app/icon.png'
+import FazzCoffeIcon from '@/app/icon.svg'
 
 const Footer = () => {
   return (

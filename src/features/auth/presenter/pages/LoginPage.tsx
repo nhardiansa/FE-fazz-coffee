@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent } from 'react'
 import { Alert, Box, Button, InputLabel, TextField, Typography } from '@mui/material'
 import Image from 'next/image'
 
-import FazzCoffeIcon from '@/app/icon.png'
+import FazzCoffeIcon from '@/app/icon.svg'
 import GoogleIcon from '@/assets/images/google-icon.png';
 import { rubik } from "@/utils/fonts"
 
@@ -117,6 +117,8 @@ const FormLogin = (props: PropsLoginForm) => {
               <Image
                 src={FazzCoffeIcon}
                 alt='Fazz Coffee Icon'
+                width={45}
+                height={48}
               />
             </Box>
             <Typography className={rubik.className} variant='h1' sx={{ fontFamily: rubik.style.fontFamily, fontSize: '20px', fontWeight: 700 }}>
